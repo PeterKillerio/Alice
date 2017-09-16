@@ -1,0 +1,60 @@
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+int list;
+vector <bool> bol;
+vector <vector<int>> susedia;
+
+void DFS(int x){
+    bol[x] = true;
+    for (int f = 0; f < susedia[x].size();f++){
+        int number = susedia[x][f];
+        if (bol[number] == false){
+            DFS(number);
+        }
+    }
+
+    if (susedia[x].size()== 1 and x!=0){
+        list++;
+    }
+
+
+}
+
+
+int main(){
+    int v;
+
+    cin >> v;
+
+    susedia.resize(v);
+
+    for (int i = 0; i < (v-1) ; i++){
+        int a,b;
+        cin >> a;
+        cin >> b;
+        a--;
+        b--;
+
+        susedia[a].push_back(b);
+        susedia[b].push_back(a);
+
+    }
+
+    bol.resize(v,false);
+
+    DFS(0);
+
+    cout << list << endl;
+
+
+
+
+
+
+
+}
+
+
